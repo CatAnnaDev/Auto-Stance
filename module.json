@@ -1,0 +1,15 @@
+{
+    "disableAutoUpdate": false,
+    "name": "Auto Stance",
+    "author": "PsykoDev",
+    "description": "Automatically activates Warrior Stance",
+    "options": {
+        "niceName": "Auto Stance",
+        "guiName": "Auto Stance",
+        "settingsVersion": 1,
+        "settingsFile": "config.json",
+        "settingsMigrator": "settings_migrator.js"
+    },
+    "servers": ["https://raw.githubusercontent.com/PsykoDev/Auto-Stance/master/"],
+  	"supportUrl": "https://github.com/PsykoDev/Auto-Stance/issues"
+}

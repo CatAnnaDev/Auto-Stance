@@ -24,7 +24,7 @@
 - **stance focus**
   - to turn ON Ninja Focus (Default ON)
 
-  - **stance warr**
+- **stance warr**
   - to turn ON Warrior Stance (Default ON)
 
 - **stance auras**

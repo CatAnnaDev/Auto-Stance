@@ -32,6 +32,10 @@ module.exports = function AutoStance(mod) {
 			settings.Auras = !settings.Auras;
 			command.message(settings.onrez ? '<font color="#00FF00">Enabled Auras</font>' : '<font color="#FF0000">Disabled Auras</font>');
 		},
+		'warr': () => {
+			settings.Stance = !settings.Stance;
+			command.message(settings.onrez ? '<font color="#00FF00">Enabled Stance</font>' : '<font color="#FF0000">Disabled Stance</font>');
+		},
 		'onrez': () => {
 			settings.onrez = !settings.onrez;
 			command.message(settings.onrez ? '<font color="#00FF00">Enabled on Resurrect</font>' : '<font color="#FF0000">Disabled on Resurrect</font>');
@@ -54,13 +58,13 @@ module.exports = function AutoStance(mod) {
 	});
 
 	function Warr() {
-		return settings.enabled && isWarrior;
+		return settings.enabled && settings.Stance && isWarrior;
 	}
 	function Myst() {
-		return settings.enabled && isMystic;
+		return settings.enabled && settings.Auras && isMystic;
 	}
 	function Ninja() {
-		return settings.enabled && isNinja;
+		return settings.enabled && settings.Focus && isNinja;
 	}
 
 	mod.game.on('enter_game', () => {
@@ -81,14 +85,14 @@ module.exports = function AutoStance(mod) {
 	});
 
 	async function Warr() {
-		if (settings.DPSStance ==! true && isWarrior){
+		if (settings.DPSStance ==! true && settings.Stance && isWarrior){
 		// DPS STANCE
 		if(hasNoAbn([100103,100150])) {
 			command.message('<font color="#00FF80">Activating DPS STANCE</font>');
 			startSkill(80400);
 			await wait(250);
 		}
-		} else if (settings.DPSStance ==! false && isWarrior) {
+		} else if (settings.DPSStance ==! false && settings.Stance && isWarrior) {
 		// TANK STANCE
 		if(hasNoAbn([100201, 100297, 100298, 100299, 100296])) {
 			command.message('<font color="#00FF80">Activating TANK STANCE</font>');

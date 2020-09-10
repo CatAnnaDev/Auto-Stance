@@ -6,7 +6,7 @@
     "options": {
         "niceName": "Auto Stance",
         "guiName": "Auto Stance",
-        "settingsVersion": 1,
+        "settingsVersion": 1.1,
         "settingsFile": "config.json",
         "settingsMigrator": "settings_migrator.js"
     },

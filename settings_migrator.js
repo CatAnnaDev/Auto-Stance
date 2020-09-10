@@ -2,6 +2,7 @@ const DefaultSettings = {
   "enabled": true,
   "onrez": false,
   "DPSStance": true,
+  "Stance": true,
   "Focus": true,
   "Auras": true
 }

@@ -1,7 +1,7 @@
 module.exports = [
     {
         "key": "enabled",
-        "name": "Enable/Disable Auto Stance:",
+        "name": "Enable/Disable Module:",
         "type": "bool"
     },
     {
@@ -12,6 +12,11 @@ module.exports = [
     {
         "key": "onrez",
         "name": "Enable/Disable Auto Stance on resurrect:",
+        "type": "bool"
+    },
+    {
+        "key": "Stance",
+        "name": "Enable/Disable Auto Stance:",
         "type": "bool"
     },
     {

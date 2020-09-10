@@ -85,14 +85,14 @@ module.exports = function AutoStance(mod) {
 	});
 
 	async function Warr() {
-		if (settings.DPSStance ==! true && settings.Stance && isWarrior){
+		if (settings.DPSStance == true && settings.Stance && isWarrior){
 		// DPS STANCE
 		if(hasNoAbn([100103,100150])) {
 			command.message('<font color="#00FF80">Activating DPS STANCE</font>');
 			startSkill(80400);
 			await wait(250);
 		}
-		} else if (settings.DPSStance ==! false && settings.Stance && isWarrior) {
+		} else if (settings.DPSStance == false && settings.Stance && isWarrior) {
 		// TANK STANCE
 		if(hasNoAbn([100201, 100297, 100298, 100299, 100296])) {
 			command.message('<font color="#00FF80">Activating TANK STANCE</font>');

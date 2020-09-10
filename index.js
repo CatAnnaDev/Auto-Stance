@@ -188,7 +188,7 @@ module.exports = function AutoStance(mod) {
 		loc = event.loc;
 		wloc = event.w;
 	});
-
+/*
 	mod.hook('S_CREATURE_LIFE', 3, (event)=>{
 		if(Warr() && settings.onrez)
 		{
@@ -209,6 +209,7 @@ module.exports = function AutoStance(mod) {
 			}
 		}
 	});
+	*/
 
 	mod.hook('S_CREATURE_LIFE', 3, (event)=>{
 		if(Myst() && settings.onrez)

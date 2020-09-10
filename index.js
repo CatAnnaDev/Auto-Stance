@@ -11,6 +11,8 @@ module.exports = function AutoStance(mod) {
 	const enabled = mod.settings.enabled;
 	let loc, wloc,
 	isWarrior = false,
+	isMystic = false,
+	isNinja = false,
 	isDead = false;
 
 	command.add(['stance', 'stances', 'autostance', 'autostances'], {
@@ -22,13 +24,25 @@ module.exports = function AutoStance(mod) {
 			settings.enabled = false;
 			command.message('<font color="#FF0000">Disabled</font>');
 		},
+		'focus': () => {
+			settings.Focus = !settings.Focus;
+			command.message(settings.onrez ? '<font color="#00FF00">Enabled Focus</font>' : '<font color="#FF0000">Disabled Focus</font>');
+		},
+		'auras': () => {
+			settings.Auras = !settings.Auras;
+			command.message(settings.onrez ? '<font color="#00FF00">Enabled Auras</font>' : '<font color="#FF0000">Disabled Auras</font>');
+		},
 		'onrez': () => {
 			settings.onrez = !settings.onrez;
 			command.message(settings.onrez ? '<font color="#00FF00">Enabled on Resurrect</font>' : '<font color="#FF0000">Disabled on Resurrect</font>');
 		},
+		'dps': () => {
+			settings.DPSStance = true;
+			command.message('<font color="#00FF00">DPS STANCE ON</font>');
+		},
 		'tank': () => {
-			settings.DPSStance = !settings.DPSStance;
-			command.message(settings.DPSStance ? '<font color="#00FF00">DPS STANCE ON</font>' : '<font color="#FF0000">TANK STANCE ON</font>');
+			settings.DPSStance = false;
+			command.message('<font color="#00FF00">TANK STANCE ON</font>');
 		},
 		'ui': () => {
 			ui.show();
@@ -39,35 +53,81 @@ module.exports = function AutoStance(mod) {
 		}
 	});
 
-	function isEnabled() {
+	function Warr() {
 		return settings.enabled && isWarrior;
+	}
+	function Myst() {
+		return settings.enabled && isMystic;
+	}
+	function Ninja() {
+		return settings.enabled && isNinja;
 	}
 
 	mod.game.on('enter_game', () => {
 		let model = mod.game.me.templateId;
 		let job = (model - 10101) % 100;
 		isWarrior = (job == 0);
-		if(isEnabled()) {
+		if(Warr()) {
 			command.message('<font color="#FFFF00">Activating Stance</font>')
-		}
+		};
+		isMystic = (job == 7);
+		if(Myst()) {
+			command.message('<font color="#FFFF00">Activating Auras</font>')
+		};
+		isNinja = (job == 11);
+		if(Ninja()) {
+			command.message('<font color="#FFFF00">Activating Focus</font>')
+		};
 	});
 
-	async function auras() {
-		if (settings.DPSStance == true){
+	async function Warr() {
+		if (settings.DPSStance ==! true && isWarrior){
 		// DPS STANCE
 		if(hasNoAbn([100103,100150])) {
 			command.message('<font color="#00FF80">Activating DPS STANCE</font>');
 			startSkill(80400);
 			await wait(250);
 		}
-	} else {
-				// TANK STANCE
-				if(hasNoAbn([100201, 100297, 100298, 100299, 100296])) {
-					command.message('<font color="#00FF80">Activating TANK STANCE</font>');
-					startSkill(90200);
-					await wait(250);
-				}
-			}
+		} else if (settings.DPSStance ==! false && isWarrior) {
+		// TANK STANCE
+		if(hasNoAbn([100201, 100297, 100298, 100299, 100296])) {
+			command.message('<font color="#00FF80">Activating TANK STANCE</font>');
+			startSkill(90200);
+			await wait(250);
+		}
+	}
+}
+
+	async function Ninja() {
+		if (settings.Focus && isNinja){
+		if(hasNoAbn([10154030, 10154032])) { // 10154032
+			command.message('<font color="#00FF80">Activating Focus</font>');
+			startSkill(110100);
+			await wait(1000);
+		}
+	}
+}
+
+	async function Myst() {
+		if (settings.Auras && isMystic){
+		// Thrall Augmentation
+		if(hasNoAbn([702000,702005])) {
+			command.message('<font color="#00FF80">Activating Thrall Augmentation</font>');
+			startSkill(450100);
+			await wait(250);
+		}
+		// Aura of the Merciless (Crit Aura)
+		if(hasNoAbn([700600,700601,700602,700603])) {
+			command.message('<font color="#FF00FF">Activating Crit Aura</font>');
+			startSkill(130400);
+			await wait(1050);
+		}
+		// Aura of the Tenacious (Mana Aura)
+		if(hasNoAbn([700330,700300])) {
+			command.message('<font color="#00FFFF">Activating Mana Aura</font>');
+			startSkill(160100);
+		}
+		}
 	}
 
 	function startSkill(skillId) { 
@@ -96,10 +156,28 @@ module.exports = function AutoStance(mod) {
 			if (mod.game.me.gameId == event.gameId) {
 				loc = event.loc;
 				wloc = event.w;
-				if(isEnabled()) {
-					mod.setTimeout(auras, 2000);
+				if(Warr()) {
+					mod.setTimeout(Warr, 2000);
 				}
 			}
+	});
+	mod.hook('S_SPAWN_ME', 3, (event) => {
+		if (mod.game.me.gameId == event.gameId) {
+			loc = event.loc;
+			wloc = event.w;
+			if(Ninja()) {
+				mod.setTimeout(Ninja, 2000);
+			}
+		}
+});
+	mod.hook('S_SPAWN_ME', 3, (event) => {
+		if (mod.game.me.gameId == event.gameId) {
+			loc = event.loc;
+			wloc = event.w;
+			if(Myst()) {
+				mod.setTimeout(Myst, 2000);
+			}
+		}
 	});
 
 	mod.hook('C_PLAYER_LOCATION', 5, (event) => {
@@ -107,9 +185,8 @@ module.exports = function AutoStance(mod) {
 		wloc = event.w;
 	});
 
-	// Auras after resurrect
 	mod.hook('S_CREATURE_LIFE', 3, (event)=>{
-		if(isEnabled() && settings.onrez)
+		if(Warr() && settings.onrez)
 		{
 			if (event.gameId !== mod.game.me.gameId) return;
 
@@ -123,7 +200,48 @@ module.exports = function AutoStance(mod) {
 			{
 				if(isDead) {
 					isDead = false;
-					mod.setTimeout(auras, 3000);
+					mod.setTimeout(Warr, 3000);
+				}
+			}
+		}
+	});
+
+	mod.hook('S_CREATURE_LIFE', 3, (event)=>{
+		if(Myst() && settings.onrez)
+		{
+			if (event.gameId !== mod.game.me.gameId) return;
+
+			loc = event.loc
+
+			if(!event.alive)
+			{
+				isDead = true;
+			}
+			else
+			{
+				if(isDead) {
+					isDead = false;
+					mod.setTimeout(Myst, 3000);
+				}
+			}
+		}
+	});
+	mod.hook('S_CREATURE_LIFE', 3, (event)=>{
+		if(Ninja() && settings.onrez)
+		{
+			if (event.gameId !== mod.game.me.gameId) return;
+
+			loc = event.loc
+
+			if(!event.alive)
+			{
+				isDead = true;
+			}
+			else
+			{
+				if(isDead) {
+					isDead = false;
+					mod.setTimeout(Ninja, 3000);
 				}
 			}
 		}

@@ -1,11 +1,11 @@
 {
   "files": {
-    "README.md": "852cf364901568ea6400eeb4e38c0b70607deb96e329651e714eece3f7513fb0",
-    "index.js": "2c0ebb25aeb09f6b29f234b9d220aed44f01d2aba364877aa289ec255b29aa1e",
+    "README.md": "2eb69172426c0d469c4d8c39cdd3fcfbb5e4e7a6eaa148cf5f0a0b364246e2e8",
+    "index.js": "fc6a36029606644caeffa3736d21542266b20b2613432f784b6692ad0936397f",
     "module.json": "2982f8245e89c79030313bddff9b3c9587e468d1d144aadec857c5723316b5e8",
 	  "abnormal.js": "023e56bffbf372d8effc78eadea575bff08e3e9751235c16070cb7ee1efeb20c",
-    "settings_migrator.js": "4e703bfd29544d281dbd659c3bedecef8b45784c798b070dfd686813f6edaf1b",
-    "settings_structure.js": "2df1972ba253c75e866891b11eac3fec2b07bf4fa635880feaa1623186c688dc"
+    "settings_migrator.js": "b0c16870d0eb1e9ecd45f69087c0d274ee0c325570646cb655e1ffc886860cb4",
+    "settings_structure.js": "7008e780efae838ea96cd1346e364df2697a83471ed93526e776b6d9274b6b46"
   },
   "defs": {
     "C_START_SKILL": 7,

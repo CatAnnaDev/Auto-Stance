@@ -1,7 +1,9 @@
 const DefaultSettings = {
   "enabled": true,
   "onrez": false,
-  "DPSStance": true
+  "DPSStance": true,
+  "Focus": true,
+  "Auras": true
 }
 
 module.exports = function MigrateSettings(from_ver, to_ver, settings) {

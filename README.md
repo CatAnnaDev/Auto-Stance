@@ -15,6 +15,18 @@
 - **stance off**
   - to turn module OFF
 
+- **stance tank**
+  - to turn ON Tank stance by default
+
+- **stance dps**
+  - to turn ON Dps stance by default (Default ON)
+
+- **stance focus**
+  - to turn ON Ninja Focus (Default ON)
+
+- **stance auras**
+  - to turn ON Mystic Auras (Default ON)
+
 - **stance onrez**
   - to toggle Auto Stance when resurrecting ON/OFF (Default OFF)
   - **Warning:** Auto Stance on resurrect can cause undesirable animation lock, use at your own risk!
@@ -26,7 +38,7 @@
 
 ## Notes:
 
-- Active stance depending your choice / config file 
+- Active stance depending your choice / config file
 
 ---
 

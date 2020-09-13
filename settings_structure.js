@@ -29,4 +29,9 @@ module.exports = [
         "name": "Enable/Disable Auto Auras:",
         "type": "bool"
     },
+    {
+        "key": "msg",
+        "name": "Enable/Disable in game msg:",
+        "type": "bool"
+    },
 ]; 

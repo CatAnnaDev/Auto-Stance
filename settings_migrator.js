@@ -4,7 +4,8 @@ const DefaultSettings = {
   "DPSStance": true,
   "Stance": true,
   "Focus": true,
-  "Auras": true
+  "Auras": true,
+  "msg": true
 }
 
 module.exports = function MigrateSettings(from_ver, to_ver, settings) {

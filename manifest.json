@@ -1,11 +1,11 @@
 {
   "files": {
-    "README.md": "fd99d09a8bdc333a540d5d249dc961a595bbaf84637f2127f796d05885f71831",
-    "index.js": "44f6304d6b4cc46f88d77e649fd781ddc5a5ec9a70b18421c61f3c9ab56b868d",
+    "README.md": "61e61e192d2bc1df6fd015ad06dd36889981f7eaa82a0c83997b4795b06dbb0a",
+    "index.js": "2f7ea4cb73e5c46a9e056b3780edc356037a9e72f55c6ccbedc314c34fbcca5c",
     "module.json": "04b65a2868e47d2afa1307edf9b33f0bb6cb1569bb0f99d1c6a05ccd12ae2353",
 	  "abnormal.js": "023e56bffbf372d8effc78eadea575bff08e3e9751235c16070cb7ee1efeb20c",
-    "settings_migrator.js": "1a18ec431bae2022139352065fa127264726984c3dea0230a74dfeb4cb44305e",
-    "settings_structure.js": "6b2122363ddffd62254d6accd8921b92873b4009a6c17317195fbc3862904517"
+    "settings_migrator.js": "b880287b2ecbb04c4b35b5dbec90e854ef2a56a8276ded12b0dc6faf2a9b9db2",
+    "settings_structure.js": "05f98150ee7545c3a89dca8dd140d178426d7394f38db1807e00aa48dbbcedfa"
   },
   "defs": {
     "C_START_SKILL": 7,

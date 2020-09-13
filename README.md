@@ -30,6 +30,9 @@
 - **stance auras**
   - to turn ON Mystic Auras (Default ON)
 
+- **stance msg**
+  - to show in game msg
+
 - **stance onrez**
   - to toggle Auto Stance when resurrecting ON/OFF (Default OFF)
   - **Warning:** Auto Stance on resurrect can cause undesirable animation lock, use at your own risk!

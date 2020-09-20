@@ -12,17 +12,18 @@ module.exports = function AutoStance(mod) {
 	let loc, wloc,
 	isDead = false;
 
-	mod.game.on('enter_game', () => {
-		Type(mod.game.me.class);
-	});
+mod.game.on('enter_game', () => {
+	let Class = mod.game.me.class;
+	Type(Class);
+});
 
-	function Type(){
-		switch (mod.game.me.class){
-			case 'warrior': Warr(); if (settings.msg){command.message('<font color="#FFFF00">Activating Stance</font>')}; break;
-			case 'assassin': Ninja(); if (settings.msg){command.message('<font color="#FFFF00">Activating Focus</font>')}; break;
-			case 'elementalist': Myst(); if (settings.msg){command.message('<font color="#FFFF00">Activating Auras</font>')}; break;
-		}
+function Type(Class){
+	switch (Class){
+		case 'warrior': Warr(); if (settings.msg){command.message('<font color="#FFFF00">Activating Stance</font>')}; break;
+		case 'assassin': Ninja(); if (settings.msg){command.message('<font color="#FFFF00">Activating Focus</font>')}; break;
+		case 'elementalist': Myst(); if (settings.msg){command.message('<font color="#FFFF00">Activating Auras</font>')}; break;
 	}
+}
 
 	async function Warr() {
 		if (settings.DPSStance == true && settings.Stance){
@@ -97,37 +98,6 @@ module.exports = function AutoStance(mod) {
 		return ('added' in AbnManager.get(mod.game.me.gameId, id));
 	}
 
-	mod.hook('S_SPAWN_ME', 3, (event) => {
-		if (mod.game.me.gameId == event.gameId) {
-			loc = event.loc;
-			wloc = event.w;
-			switch (mod.game.me.class){
-				case 'warrior': Warr(); if (settings.msg){command.message('<font color="#FFFF00">Activating Stance</font>')}; break;
-				case 'assassin': Ninja(); if (settings.msg){command.message('<font color="#FFFF00">Activating Focus</font>')}; break;
-				case 'elementalist': Myst(); if (settings.msg){command.message('<font color="#FFFF00">Activating Auras</font>')}; break;
-			}
-		}
-	});
-	/*
-	mod.hook('S_SPAWN_ME', 3, (event) => {
-		if (mod.game.me.gameId == event.gameId) {
-			loc = event.loc;
-			wloc = event.w;
-			if(Ninja()) {
-				mod.setTimeout(Ninja, 2000);
-			}
-		}
-	});
-	mod.hook('S_SPAWN_ME', 3, (event) => {
-		if (mod.game.me.gameId == event.gameId) {
-			loc = event.loc;
-			wloc = event.w;
-			if(Myst()) {
-				mod.setTimeout(Myst, 2000);
-			}
-		}
-	});
-*/
 	mod.hook('C_PLAYER_LOCATION', 5, (event) => {
 		loc = event.loc;
 		wloc = event.w;
@@ -172,8 +142,7 @@ module.exports = function AutoStance(mod) {
 				}
 			}
 		}
-	});
-	
+	});	
 	command.add(['stance', 'stances', 'autostance', 'autostances'], {
 		'on': () => {
 			settings.enabled = true;
@@ -219,14 +188,13 @@ module.exports = function AutoStance(mod) {
 			command.message(settings.enabled ? '<font color="#00FF00">Enabled</font>' : '<font color="#FF0000">Disabled</font>');
 		}
 	});
-
 	// User Interface
     let ui = null;
 	if (global.TeraProxy.GUIMode) {
 		ui = new Settings_UI(mod, require('./settings_structure'), mod.settings, { 
 			alwaysOnTop: true,
 			width: 500,
-			height: 250 
+			height: 270 
 		});
 		ui.on('update', settings => {
 			mod.settings = settings;
